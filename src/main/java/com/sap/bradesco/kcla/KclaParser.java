@@ -6,24 +6,19 @@ import org.apache.commons.cli.*;
  * Hello world!
  */
 public class KclaParser {
-    public static void main(String[] parameters) {
+    public static void main(String[] args) {
 
         CommandLine commandLine;
-        Option option_r = Option.builder("file").required(true).desc("The file option").longOpt("opt1").build();
         Options options = new Options();
+        options.addOption("file", true, "country code");
         CommandLineParser parser = new DefaultParser();
 
-        String[] testArgs = { "-file", "opt1", };
-
-        options.addOption(option_r);
-
         try {
-            commandLine = parser.parse(options, parameters);
+            commandLine = parser.parse(options, args);
 
-            if (commandLine.hasOption("file")) {
-                System.out.print("Option file is present.  The value is: ");
-                System.out.println(commandLine.getOptionValue("file"));
-            }
+
+            String filename = commandLine.getOptionValue("file");
+            System.out.println(filename);
 
         } catch (ParseException exception) {
             System.out.print("Parse error: ");
